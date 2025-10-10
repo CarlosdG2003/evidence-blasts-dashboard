@@ -14,7 +14,7 @@ SELECT
     round(avg(try_cast(specific_charge_real as double)), 3) as carga_especifica_promedio,
     round(sum(try_cast(production_real as double)), 2) as produccion_total,
     round(sum(try_cast(emulsion as double)) + sum(try_cast(anfo as double)) + sum(try_cast(goma as double)), 2) as explosivos_total
-FROM parquets.blasts
+FROM parquets.prd_sdi_min_blasts
 WHERE date IS NOT NULL;
 ```
 
@@ -60,7 +60,7 @@ SELECT
     date as fecha,
     count(*) as num_voladuras,
     round(sum(try_cast(production_real as double)), 2) as produccion_total
-FROM parquets.blasts
+FROM parquets.prd_sdi_min_blasts
 WHERE date IS NOT NULL
 GROUP BY date
 ORDER BY date;
@@ -92,7 +92,7 @@ SELECT
     round(avg(try_cast(production_real as double)), 2) as produccion_promedio,
     round(sum(try_cast(production_real_ore as double)), 2) as mineral,
     round(sum(try_cast(production_real_waste as double)), 2) as esteril
-FROM parquets.blasts
+FROM parquets.prd_sdi_min_blasts
 WHERE try_cast(production_real as double) IS NOT NULL
 GROUP BY zone
 ORDER BY produccion_total DESC;
@@ -118,7 +118,7 @@ SELECT
     round(avg(try_cast(production_theoretical as double)), 2) as prod_teorica,
     round(avg(try_cast(production_real as double)), 2) as prod_real,
     round((avg(try_cast(production_real as double)) / nullif(avg(try_cast(production_theoretical as double)), 0)) * 100, 1) as eficiencia_pct
-FROM parquets.blasts
+FROM parquets.prd_sdi_min_blasts
 WHERE try_cast(production_theoretical as double) IS NOT NULL 
   AND try_cast(production_real as double) IS NOT NULL
   AND try_cast(production_theoretical as double) > 0
@@ -147,7 +147,7 @@ SELECT
     round(sum(try_cast(anfo as double)), 2) as anfo,
     round(sum(try_cast(goma as double)), 2) as goma,
     round(sum(try_cast(emulsion as double)) + sum(try_cast(anfo as double)) + sum(try_cast(goma as double)), 2) as total_explosivos
-FROM parquets.blasts
+FROM parquets.prd_sdi_min_blasts
 GROUP BY zone
 ORDER BY total_explosivos DESC;
 ```
@@ -172,7 +172,7 @@ SELECT
     round(avg(try_cast(specific_charge_theoretical as double)), 3) as carga_teorica,
     round(avg(try_cast(specific_charge_real as double)), 3) as carga_real,
     count(*) as num_voladuras
-FROM parquets.blasts
+FROM parquets.prd_sdi_min_blasts
 WHERE try_cast(specific_charge_real as double) IS NOT NULL
 GROUP BY zone
 ORDER BY carga_real DESC;
@@ -200,7 +200,7 @@ SELECT
     round(avg(try_cast(pb as double)), 4) as pb_pct,
     round(avg(try_cast(fe as double)), 4) as fe_pct,
     round(avg(try_cast(s as double)), 4) as s_pct
-FROM parquets.blasts
+FROM parquets.prd_sdi_min_blasts
 WHERE try_cast(cu as double) IS NOT NULL
    OR try_cast(zn as double) IS NOT NULL
    OR try_cast(pb as double) IS NOT NULL
@@ -222,7 +222,7 @@ SELECT
     round(avg(try_cast(height as double)), 1) as altura_promedio,
     round(avg(try_cast(stemming as double)), 1) as retacado_promedio,
     count(*) as num_voladuras
-FROM parquets.blasts
+FROM parquets.prd_sdi_min_blasts
 WHERE try_cast(drill_diameter as double) IS NOT NULL
 GROUP BY zone
 ORDER BY num_voladuras DESC;
@@ -239,7 +239,7 @@ SELECT
     try_cast(specific_charge_real as double) as carga_especifica,
     try_cast(production_real as double) as produccion_real,
     coalesce(nullif(trim(zone), ''), 'Sin zona') as zona
-FROM parquets.blasts
+FROM parquets.prd_sdi_min_blasts
 WHERE try_cast(specific_charge_real as double) IS NOT NULL 
   AND try_cast(production_real as double) IS NOT NULL
   AND try_cast(specific_charge_real as double) > 0
@@ -264,21 +264,21 @@ SELECT
     'Mineral' as tipo,
     round(sum(try_cast(production_real_ore as double)), 2) as toneladas,
     round((sum(try_cast(production_real_ore as double)) / nullif(sum(try_cast(production_real as double)), 0)) * 100, 1) as porcentaje
-FROM parquets.blasts
+FROM parquets.prd_sdi_min_blasts
 WHERE try_cast(production_real_ore as double) IS NOT NULL
 UNION ALL
 SELECT 
     'Estéril' as tipo,
     round(sum(try_cast(production_real_waste as double)), 2) as toneladas,
     round((sum(try_cast(production_real_waste as double)) / nullif(sum(try_cast(production_real as double)), 0)) * 100, 1) as porcentaje
-FROM parquets.blasts
+FROM parquets.prd_sdi_min_blasts
 WHERE try_cast(production_real_waste as double) IS NOT NULL
 UNION ALL
 SELECT 
     'Marginal' as tipo,
     round(sum(try_cast(production_real_marginal as double)), 2) as toneladas,
     round((sum(try_cast(production_real_marginal as double)) / nullif(sum(try_cast(production_real as double)), 0)) * 100, 1) as porcentaje
-FROM parquets.blasts
+FROM parquets.prd_sdi_min_blasts
 WHERE try_cast(production_real_marginal as double) IS NOT NULL;
 ```
 
@@ -304,7 +304,7 @@ SELECT
     round(try_cast(specific_charge_real as double), 3) as carga_especifica,
     try_cast(holes as integer) as hoyos,
     round(try_cast(emulsion as double) + try_cast(anfo as double) + try_cast(goma as double), 2) as explosivos_total
-FROM parquets.blasts
+FROM parquets.prd_sdi_min_blasts
 WHERE date IS NOT NULL
 ORDER BY date DESC
 LIMIT 20;

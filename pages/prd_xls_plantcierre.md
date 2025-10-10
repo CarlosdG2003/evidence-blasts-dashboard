@@ -14,7 +14,7 @@ SELECT
     round(avg(try_cast(valor as double)), 2) as valor_promedio,
     min(fecha) as fecha_inicio,
     max(fecha) as fecha_fin
-FROM parquets.plantcierre
+FROM parquets.prd_xls_plantcierre
 WHERE fecha IS NOT NULL;
 ```
 
@@ -53,7 +53,7 @@ SELECT
     fecha,
     sum(try_cast(valor as double)) as valor_total,
     count(*) as num_registros
-FROM parquets.plantcierre
+FROM parquets.prd_xls_plantcierre
 WHERE fecha IS NOT NULL
   AND try_cast(valor as double) IS NOT NULL
 GROUP BY fecha
@@ -86,7 +86,7 @@ SELECT
     round(avg(try_cast(valor as double)), 2) as valor_promedio,
     round(min(try_cast(valor as double)), 2) as valor_min,
     round(max(try_cast(valor as double)), 2) as valor_max
-FROM parquets.plantcierre
+FROM parquets.prd_xls_plantcierre
 WHERE try_cast(valor as double) IS NOT NULL
 GROUP BY produccion
 ORDER BY valor_total DESC;
@@ -112,7 +112,7 @@ SELECT
     round(avg(try_cast(valor as double)), 2) as promedio,
     round(min(try_cast(valor as double)), 2) as minimo,
     round(max(try_cast(valor as double)), 2) as maximo
-FROM parquets.plantcierre
+FROM parquets.prd_xls_plantcierre
 WHERE try_cast(valor as double) IS NOT NULL
 GROUP BY produccion
 ORDER BY promedio DESC;
@@ -136,7 +136,7 @@ SELECT
     round(sum(try_cast(valor as double)), 2) as valor_total,
     round(avg(try_cast(valor as double)), 2) as valor_promedio,
     count(*) as num_registros
-FROM parquets.plantcierre
+FROM parquets.prd_xls_plantcierre
 WHERE fecha IS NOT NULL
   AND try_cast(valor as double) IS NOT NULL
 GROUP BY strftime(fecha, '%Y-%m')
@@ -166,7 +166,7 @@ SELECT
     fecha,
     coalesce(nullif(trim(produccion), ''), 'Sin categoría') as tipo_produccion,
     round(sum(try_cast(valor as double)), 2) as valor
-FROM parquets.plantcierre
+FROM parquets.prd_xls_plantcierre
 WHERE fecha IS NOT NULL
   AND try_cast(valor as double) IS NOT NULL
 GROUP BY fecha, produccion
@@ -191,7 +191,7 @@ SELECT
     round(sum(try_cast(valor as double)), 2) as valor_total,
     count(distinct produccion) as tipos_produccion,
     count(*) as num_registros
-FROM parquets.plantcierre
+FROM parquets.prd_xls_plantcierre
 WHERE fecha IS NOT NULL
   AND try_cast(valor as double) IS NOT NULL
 GROUP BY fecha
@@ -211,7 +211,7 @@ SELECT
     round(sum(try_cast(valor as double)), 2) as valor_total,
     count(distinct produccion) as tipos_produccion,
     count(*) as num_registros
-FROM parquets.plantcierre
+FROM parquets.prd_xls_plantcierre
 WHERE fecha IS NOT NULL
   AND try_cast(valor as double) IS NOT NULL
 GROUP BY fecha
@@ -236,7 +236,7 @@ SELECT
     END as rango_valor,
     count(*) as cantidad,
     round(sum(try_cast(valor as double)), 2) as valor_total
-FROM parquets.plantcierre
+FROM parquets.prd_xls_plantcierre
 WHERE try_cast(valor as double) IS NOT NULL
 GROUP BY rango_valor
 ORDER BY 
@@ -265,7 +265,7 @@ SELECT
     fecha,
     produccion as tipo_produccion,
     round(try_cast(valor as double), 2) as valor
-FROM parquets.plantcierre
+FROM parquets.prd_xls_plantcierre
 WHERE fecha IS NOT NULL
 ORDER BY fecha DESC
 LIMIT 30;
@@ -287,7 +287,7 @@ SELECT
     round(max(try_cast(valor as double)), 2) as maximo,
     min(fecha) as primera_fecha,
     max(fecha) as ultima_fecha
-FROM parquets.plantcierre
+FROM parquets.prd_xls_plantcierre
 WHERE try_cast(valor as double) IS NOT NULL
 GROUP BY produccion
 ORDER BY total DESC;

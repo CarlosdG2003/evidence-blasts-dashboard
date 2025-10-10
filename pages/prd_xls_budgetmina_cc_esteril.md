@@ -7,7 +7,7 @@ Este dashboard muestra una exploración automática de **PRD_XLS_BudgetMina_CC_E
 ## Cargar datos
 
 ```sql prd_xls_budgetmina_cc_esteril_data
-SELECT * FROM parquets.budgetmina_cc_esteril;
+SELECT * FROM parquets.prd_xls_budgetmina_cc_esteril;
 ```
 
 ---
@@ -24,7 +24,7 @@ SELECT * FROM parquets.budgetmina_cc_esteril;
 SELECT 
     date as fecha,
     count(*) as cantidad
-FROM parquets.budgetmina_cc_esteril
+FROM parquets.prd_xls_budgetmina_cc_esteril
 WHERE date IS NOT NULL
 GROUP BY date
 ORDER BY date;
@@ -45,7 +45,7 @@ ORDER BY date;
 SELECT 
     try_cast(vol_m3 as double) as var1,
     try_cast(peso_ton as double) as var2
-FROM parquets.budgetmina_cc_esteril
+FROM parquets.prd_xls_budgetmina_cc_esteril
 WHERE try_cast(vol_m3 as double) IS NOT NULL 
   AND try_cast(peso_ton as double) IS NOT NULL
 LIMIT 1000;
@@ -67,7 +67,7 @@ SELECT
     round(avg(try_cast(vol_m3 as double)), 2) as promedio_vol_m3,
     round(avg(try_cast(peso_ton as double)), 2) as promedio_peso_ton,
     round(avg(try_cast(cu_porcentaje as double)), 2) as promedio_cu_porcentaje
-FROM parquets.budgetmina_cc_esteril;
+FROM parquets.prd_xls_budgetmina_cc_esteril;
 ```
 
 <BigValue 
@@ -99,7 +99,7 @@ FROM parquets.budgetmina_cc_esteril;
 SELECT 
     count(*) as total_registros,
     round(avg(try_cast(vol_m3 as double)), 2) as promedio_principal
-FROM parquets.budgetmina_cc_esteril;
+FROM parquets.prd_xls_budgetmina_cc_esteril;
 ```
 
 <BigValue 

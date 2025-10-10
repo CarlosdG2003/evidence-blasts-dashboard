@@ -15,7 +15,7 @@ SELECT
     round(avg(try_cast(cu_rec as double)), 2) as recuperacion_promedio,
     round(avg(try_cast(cu_cf as double)), 4) as ley_concentrado_promedio,
     round(avg(try_cast(availability as double)), 2) as disponibilidad_promedio
-FROM parquets.plant_prod_plan
+FROM parquets.prd_sdi_plant_prod_plan
 WHERE date IS NOT NULL;
 ```
 
@@ -77,7 +77,7 @@ SELECT
     round(try_cast(tons_dry as double), 2) as tonelaje_seco,
     round(try_cast(tons_day as double), 2) as tonelaje_dia,
     round(try_cast(tons_shift as double), 2) as tonelaje_turno
-FROM parquets.plant_prod_plan
+FROM parquets.prd_sdi_plant_prod_plan
 WHERE date IS NOT NULL
   AND try_cast(tons_dry as double) IS NOT NULL
 ORDER BY date;
@@ -101,7 +101,7 @@ SELECT
     round(try_cast(tons_cu_metal as double), 2) as cobre_metal,
     round(try_cast(tons_cu_day as double), 2) as cobre_dia,
     round(try_cast(tons_cu_shift as double), 2) as cobre_turno
-FROM parquets.plant_prod_plan
+FROM parquets.prd_sdi_plant_prod_plan
 WHERE date IS NOT NULL
   AND try_cast(tons_cu_metal as double) IS NOT NULL
 ORDER BY date;
@@ -132,7 +132,7 @@ SELECT
     round(try_cast(cu_cf as double), 4) as ley_concentrado,
     round(try_cast(cu_cp as double), 4) as ley_cabeza,
     round(try_cast(availability as double), 2) as disponibilidad
-FROM parquets.plant_prod_plan
+FROM parquets.prd_sdi_plant_prod_plan
 WHERE date IS NOT NULL
 ORDER BY date;
 ```
@@ -171,7 +171,7 @@ SELECT
     round(sum(try_cast(tons_cu_metal as double)), 2) as cobre_metal_total,
     round(avg(try_cast(cu_rec as double)), 2) as recuperacion_promedio,
     round(avg(try_cast(availability as double)), 2) as disponibilidad_promedio
-FROM parquets.plant_prod_plan
+FROM parquets.prd_sdi_plant_prod_plan
 WHERE date IS NOT NULL
 GROUP BY strftime(date, '%Y-%m')
 ORDER BY mes;
@@ -203,7 +203,7 @@ SELECT
     round(avg(try_cast(cu_rec as double)), 2) as recuperacion_promedio,
     round(avg(try_cast(availability as double)), 2) as disponibilidad_promedio,
     round((avg(try_cast(tons_dry as double)) / nullif(avg(try_cast(tons_day as double)), 0)) * 100, 2) as eficiencia_tonelaje
-FROM parquets.plant_prod_plan
+FROM parquets.prd_sdi_plant_prod_plan
 WHERE date IS NOT NULL
   AND try_cast(tons_day as double) > 0
 GROUP BY strftime(date, '%Y-%m')
@@ -225,7 +225,7 @@ ORDER BY mes;
 SELECT 
     try_cast(tons_dry as double) as tonelaje_seco,
     try_cast(tons_cu_metal as double) as cobre_metal
-FROM parquets.plant_prod_plan
+FROM parquets.prd_sdi_plant_prod_plan
 WHERE try_cast(tons_dry as double) IS NOT NULL 
   AND try_cast(tons_cu_metal as double) IS NOT NULL
   AND try_cast(tons_dry as double) > 0
@@ -248,7 +248,7 @@ LIMIT 1000;
 SELECT 
     try_cast(cu_rec as double) as recuperacion,
     try_cast(cu_cf as double) as ley_concentrado
-FROM parquets.plant_prod_plan
+FROM parquets.prd_sdi_plant_prod_plan
 WHERE try_cast(cu_rec as double) IS NOT NULL 
   AND try_cast(cu_cf as double) IS NOT NULL
   AND try_cast(cu_rec as double) > 0
@@ -274,7 +274,7 @@ SELECT
     round(try_cast(tons_cu_metal as double), 2) as cobre_metal,
     round(try_cast(cu_rec as double), 2) as recuperacion,
     round(try_cast(availability as double), 2) as disponibilidad
-FROM parquets.plant_prod_plan
+FROM parquets.prd_sdi_plant_prod_plan
 WHERE date IS NOT NULL
   AND try_cast(tons_cu_metal as double) IS NOT NULL
 ORDER BY try_cast(tons_cu_metal as double) DESC
@@ -294,7 +294,7 @@ SELECT
     round(try_cast(cu_rec as double), 2) as recuperacion,
     round(try_cast(cu_cf as double), 4) as ley_concentrado,
     round(try_cast(availability as double), 2) as disponibilidad
-FROM parquets.plant_prod_plan
+FROM parquets.prd_sdi_plant_prod_plan
 WHERE date IS NOT NULL
   AND try_cast(cu_rec as double) IS NOT NULL
   AND try_cast(cu_rec as double) > 0
@@ -316,7 +316,7 @@ SELECT
     round(try_cast(cu_rec as double), 2) as recuperacion,
     round(try_cast(cu_cf as double), 4) as ley_concentrado,
     round(try_cast(availability as double), 2) as disponibilidad
-FROM parquets.plant_prod_plan
+FROM parquets.prd_sdi_plant_prod_plan
 WHERE date IS NOT NULL
 ORDER BY date DESC
 LIMIT 30;
@@ -340,7 +340,7 @@ SELECT
     round(min(try_cast(cu_rec as double)), 2) as recuperacion_minima,
     round(max(try_cast(cu_rec as double)), 2) as recuperacion_maxima,
     round(avg(try_cast(availability as double)), 2) as disponibilidad_promedio
-FROM parquets.plant_prod_plan;
+FROM parquets.prd_sdi_plant_prod_plan;
 ```
 
 <DataTable data={estadisticas_detalladas}/>

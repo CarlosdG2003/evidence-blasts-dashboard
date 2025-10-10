@@ -1,0 +1,1 @@
+SELECT * FROM 'PRD_XLS_PlantCierre.parquet'

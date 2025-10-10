@@ -14,7 +14,7 @@ SELECT
     round(avg(try_cast(cu_porcentaje as double)), 4) as ley_cu_promedio,
     round(avg(try_cast(zn_porcentaje as double)), 4) as ley_zn_promedio,
     round(avg(try_cast(pb_porcentaje as double)), 4) as ley_pb_promedio
-FROM parquets.budgetmina_cc_mineral
+FROM parquets.prd_xls_budgetmina_cc_mineral
 WHERE date IS NOT NULL;
 ```
 
@@ -57,7 +57,7 @@ SELECT
     round(avg(try_cast(cu_porcentaje as double)), 4) as ley_cu,
     round(avg(try_cast(zn_porcentaje as double)), 4) as ley_zn,
     round(avg(try_cast(pb_porcentaje as double)), 4) as ley_pb
-FROM parquets.budgetmina_cc_mineral
+FROM parquets.prd_xls_budgetmina_cc_mineral
 WHERE date IS NOT NULL
 GROUP BY strftime(date, '%Y-%m')
 ORDER BY strftime(date, '%Y-%m');
@@ -89,7 +89,7 @@ SELECT
     round(avg(try_cast(pb_porcentaje as double)), 4) as pb,
     round(avg(try_cast(fe_porcentaje as double)), 4) as fe,
     round(avg(try_cast(s_porcentaje as double)), 4) as s
-FROM parquets.budgetmina_cc_mineral
+FROM parquets.prd_xls_budgetmina_cc_mineral
 WHERE date IS NOT NULL
 GROUP BY strftime(date, '%Y-%m')
 ORDER BY strftime(date, '%Y-%m');
@@ -113,7 +113,7 @@ SELECT
     round(avg(try_cast(cu_porcentaje as double)), 4) as ley_cu,
     round(avg(try_cast(zn_porcentaje as double)), 4) as ley_zn,
     round(avg(try_cast(ag_ppm as double)), 2) as ley_ag
-FROM parquets.budgetmina_cc_mineral
+FROM parquets.prd_xls_budgetmina_cc_mineral
 WHERE date IS NOT NULL
 GROUP BY strftime(date, '%Y')
 ORDER BY año;
@@ -137,31 +137,31 @@ SELECT
     'Cobre (Cu)' as metal,
     round(avg(try_cast(cu_porcentaje as double)), 4) as ley_porcentaje,
     'Porcentaje' as unidad
-FROM parquets.budgetmina_cc_mineral
+FROM parquets.prd_xls_budgetmina_cc_mineral
 UNION ALL
 SELECT 
     'Zinc (Zn)' as metal,
     round(avg(try_cast(zn_porcentaje as double)), 4) as ley_porcentaje,
     'Porcentaje' as unidad
-FROM parquets.budgetmina_cc_mineral
+FROM parquets.prd_xls_budgetmina_cc_mineral
 UNION ALL
 SELECT 
     'Plomo (Pb)' as metal,
     round(avg(try_cast(pb_porcentaje as double)), 4) as ley_porcentaje,
     'Porcentaje' as unidad
-FROM parquets.budgetmina_cc_mineral
+FROM parquets.prd_xls_budgetmina_cc_mineral
 UNION ALL
 SELECT 
     'Hierro (Fe)' as metal,
     round(avg(try_cast(fe_porcentaje as double)), 4) as ley_porcentaje,
     'Porcentaje' as unidad
-FROM parquets.budgetmina_cc_mineral
+FROM parquets.prd_xls_budgetmina_cc_mineral
 UNION ALL
 SELECT 
     'Azufre (S)' as metal,
     round(avg(try_cast(s_porcentaje as double)), 4) as ley_porcentaje,
     'Porcentaje' as unidad
-FROM parquets.budgetmina_cc_mineral;
+FROM parquets.prd_xls_budgetmina_cc_mineral;
 ```
 
 <BarChart 
@@ -180,25 +180,25 @@ FROM parquets.budgetmina_cc_mineral;
 SELECT 
     'Plata (Ag)' as elemento,
     round(avg(try_cast(ag_ppm as double)), 2) as promedio_ppm
-FROM parquets.budgetmina_cc_mineral
+FROM parquets.prd_xls_budgetmina_cc_mineral
 WHERE try_cast(ag_ppm as double) IS NOT NULL
 UNION ALL
 SELECT 
     'Arsénico (As)' as elemento,
     round(avg(try_cast(as_ppm as double)), 2) as promedio_ppm
-FROM parquets.budgetmina_cc_mineral
+FROM parquets.prd_xls_budgetmina_cc_mineral
 WHERE try_cast(as_ppm as double) IS NOT NULL
 UNION ALL
 SELECT 
     'Antimonio (Sb)' as elemento,
     round(avg(try_cast(sb_ppm as double)), 2) as promedio_ppm
-FROM parquets.budgetmina_cc_mineral
+FROM parquets.prd_xls_budgetmina_cc_mineral
 WHERE try_cast(sb_ppm as double) IS NOT NULL
 UNION ALL
 SELECT 
     'Bismuto (Bi)' as elemento,
     round(avg(try_cast(bi_ppm as double)), 2) as promedio_ppm
-FROM parquets.budgetmina_cc_mineral
+FROM parquets.prd_xls_budgetmina_cc_mineral
 WHERE try_cast(bi_ppm as double) IS NOT NULL;
 ```
 
@@ -225,7 +225,7 @@ SELECT
     round(avg(try_cast(ag_ppm as double)), 2) as ag_promedio_ppm,
     min(date) as fecha_inicio,
     max(date) as fecha_fin
-FROM parquets.budgetmina_cc_mineral;
+FROM parquets.prd_xls_budgetmina_cc_mineral;
 ```
 
 <DataTable data={resumen_estadistico}/>

@@ -1,0 +1,7 @@
+node_modules
+.evidence
+.svelte-kit
+build
+.git
+.env
+*.log

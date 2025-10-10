@@ -1,1 +1,0 @@
-SELECT * FROM 'C:/Users/xcarlos.diaz/OneDrive - Atalaya Riotinto Minera S.L.U/Escritorio/evidence-blasts-dashboard/sources/parquets/PRD_SDI_PLANT_PROD_PLAN.parquet'
