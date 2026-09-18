@@ -1,1 +1,0 @@
-SELECT * FROM 'PRD_SDI_MIN_BLASTS.parquet'

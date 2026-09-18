@@ -1,1 +1,0 @@
-SELECT * FROM 'PRD_XLS_BudgetMina_CC_Esteril.parquet'

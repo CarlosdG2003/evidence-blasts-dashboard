@@ -1,1 +1,0 @@
-SELECT * FROM 'cerro_colorado_mineral_2024.parquet'
